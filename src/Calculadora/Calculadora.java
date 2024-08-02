@@ -4,6 +4,16 @@
  */
 package Calculadora;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 /**
  *
  * @author Cristian Padilla
@@ -55,12 +65,11 @@ public class Calculadora extends javax.swing.JFrame {
         btn_div = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_opt = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemNuevo = new javax.swing.JMenuItem();
+        jMenuItemHistorial = new javax.swing.JMenuItem();
         menu_help = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_result.setFont(new java.awt.Font("Cambria Math", 1, 36)); // NOI18N
         txt_result.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -69,7 +78,6 @@ public class Calculadora extends javax.swing.JFrame {
                 txt_resultActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_result, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 350, 90));
 
         btn_mm.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_mm.setText("±");
@@ -79,7 +87,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_mmActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_mm, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 76, 80));
 
         btn_retro.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_retro.setText("←");
@@ -88,7 +95,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_retroActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_retro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 76, 80));
 
         btn_ce.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_ce.setText("CE");
@@ -97,7 +103,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_ceActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_ce, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 76, 80));
 
         btn_c.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_c.setText("C");
@@ -106,7 +111,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_cActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 76, 80));
 
         btn_digit1.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit1.setText("1");
@@ -115,7 +119,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 76, 80));
 
         btn_digit2.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit2.setText("2");
@@ -124,7 +127,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 76, 80));
 
         btn_digit3.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit3.setText("3");
@@ -133,7 +135,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit3ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 76, 80));
 
         btn_mas.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_mas.setText("+");
@@ -142,7 +143,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_masActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_mas, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 76, 80));
 
         btn_digit4.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit4.setText("4");
@@ -151,7 +151,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit4ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 76, 80));
 
         btn_digit5.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit5.setText("5");
@@ -160,7 +159,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit5ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 76, 80));
 
         btn_digit6.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit6.setText("6");
@@ -169,7 +167,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit6ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 76, 80));
 
         btn_menos.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_menos.setText("-");
@@ -178,7 +175,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_menosActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_menos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 76, 80));
 
         btn_digit7.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit7.setText("7");
@@ -187,7 +183,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit7ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 76, 80));
 
         btn_digit8.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit8.setText("8");
@@ -196,7 +191,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit8ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 76, 80));
 
         btn_digit9.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit9.setText("9");
@@ -205,7 +199,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit9ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 76, 80));
 
         btn_por.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_por.setText("*");
@@ -214,7 +207,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_porActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_por, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 76, 80));
 
         btn_digit0.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_digit0.setText("0");
@@ -223,7 +215,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_digit0ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_digit0, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 76, 80));
 
         btn_dot.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_dot.setText(".");
@@ -232,7 +223,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_dotActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_dot, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 480, 76, 80));
 
         btn_igual.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_igual.setText("=");
@@ -241,7 +231,6 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_igualActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_igual, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 76, 80));
 
         btn_div.setFont(new java.awt.Font("Cambria Math", 1, 32)); // NOI18N
         btn_div.setText("/");
@@ -250,21 +239,25 @@ public class Calculadora extends javax.swing.JFrame {
                 btn_divActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_div, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 76, 80));
 
         menu_opt.setText("Opciones");
         menu_opt.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
 
-        jMenuItem1.setText("Nuevo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemNuevo.setText("Nuevo");
+        jMenuItemNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemNuevoActionPerformed(evt);
             }
         });
-        menu_opt.add(jMenuItem1);
+        menu_opt.add(jMenuItemNuevo);
 
-        jMenuItem2.setText("Historial");
-        menu_opt.add(jMenuItem2);
+        jMenuItemHistorial.setText("Historial");
+        jMenuItemHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHistorialActionPerformed(evt);
+            }
+        });
+        menu_opt.add(jMenuItemHistorial);
 
         jMenuBar1.add(menu_opt);
 
@@ -274,73 +267,166 @@ public class Calculadora extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_result, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_retro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_ce, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_c, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_mm, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_digit1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_digit2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_digit3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_mas, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_digit4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_digit5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_digit6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_menos, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_digit7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_digit8, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_digit9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_por, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_digit0, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_dot, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_igual, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_div, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(txt_result, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_retro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_ce, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_c, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_mm, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_digit1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_digit2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_digit3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_mas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_digit4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_digit5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_digit6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_menos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_digit7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_digit8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_digit9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_por, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_digit0, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_dot, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_igual, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_div, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void EnterNumbers(String q){
-        String Nums = txt_result.getText() + q;
-        txt_result.setText(Nums);
-    }
-            
-    
     private void txt_resultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_resultActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_resultActionPerformed
 
     private void btn_digit6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit6ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("6");
+        txt_result.setText(txt_result.getText() + "6");
+        logToFile("6");
     }//GEN-LAST:event_btn_digit6ActionPerformed
 
     private void btn_digit8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit8ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("8");
+        txt_result.setText(txt_result.getText() + "8");
+        logToFile("8");
     }//GEN-LAST:event_btn_digit8ActionPerformed
 
     private void btn_porActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_porActionPerformed
         NumEnter1 = Double.parseDouble(txt_result.getText() );
         txt_result.setText("");
         op = "*";
+        logToFile("*");
     }//GEN-LAST:event_btn_porActionPerformed
 
     private void btn_digit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit1ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("1");
+        txt_result.setText(txt_result.getText() + "1");
+        logToFile("1");
     }//GEN-LAST:event_btn_digit1ActionPerformed
 
     private void btn_digit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit2ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("2");
+        txt_result.setText(txt_result.getText() + "2");
+        logToFile("2");
     }//GEN-LAST:event_btn_digit2ActionPerformed
 
     private void btn_digit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit3ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("3");
+        txt_result.setText(txt_result.getText() + "3");
+        logToFile("3");
     }//GEN-LAST:event_btn_digit3ActionPerformed
 
     private void btn_digit4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit4ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("4");
+        txt_result.setText(txt_result.getText() + "4");
+        logToFile("4");
     }//GEN-LAST:event_btn_digit4ActionPerformed
 
     private void btn_digit5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit5ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("5");
+        txt_result.setText(txt_result.getText() + "5");
+        logToFile("5");
     }//GEN-LAST:event_btn_digit5ActionPerformed
 
     private void btn_digit7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit7ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("7");
+        txt_result.setText(txt_result.getText() + "7");
+        logToFile("7");
     }//GEN-LAST:event_btn_digit7ActionPerformed
 
     private void btn_digit9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit9ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("9");
+        txt_result.setText(txt_result.getText() + "9");
+        logToFile("9");
     }//GEN-LAST:event_btn_digit9ActionPerformed
 
     private void btn_digit0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit0ActionPerformed
         // TODO add your handling code here:
-        EnterNumbers("0");
+        txt_result.setText(txt_result.getText() + "0");
+        logToFile("0");
     }//GEN-LAST:event_btn_digit0ActionPerformed
 
     private void btn_divActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_divActionPerformed
@@ -348,95 +434,114 @@ public class Calculadora extends javax.swing.JFrame {
         NumEnter1 = Double.parseDouble(txt_result.getText() );
         txt_result.setText("");
         op = "/";
+        logToFile("/");
     }//GEN-LAST:event_btn_divActionPerformed
 
     private void btn_masActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_masActionPerformed
         NumEnter1 = Double.parseDouble(txt_result.getText() );
         txt_result.setText("");
         op = "+";
+        logToFile("+");
     }//GEN-LAST:event_btn_masActionPerformed
 
     private void btn_menosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menosActionPerformed
         NumEnter1 = Double.parseDouble(txt_result.getText() );
         txt_result.setText("");
         op = "-";
+        logToFile("-");
     }//GEN-LAST:event_btn_menosActionPerformed
 
     private void btn_cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cActionPerformed
         txt_result.setText("");
+        NumEnter1 = 0;
+        NumEnter2 = 0;
     }//GEN-LAST:event_btn_cActionPerformed
 
     private void btn_ceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ceActionPerformed
         txt_result.setText("");
         
-        String Fn, Sn;
-        Fn = String.valueOf(NumEnter1);
-        Sn = String.valueOf(NumEnter2);
-        
-        Fn =""; 
-        Sn ="";
     }//GEN-LAST:event_btn_ceActionPerformed
 
     private void btn_mmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mmActionPerformed
         
-        double nums = Double.parseDouble(String.valueOf(txt_result.getText()));
-        nums = nums * (-1);
-        txt_result.setText(String.valueOf(nums));
+        double val = Double.parseDouble(txt_result.getText());
+        val = val * -1;
+        txt_result.setText(String.format("%.2f", val));
+        logToFile("±");
     }//GEN-LAST:event_btn_mmActionPerformed
 
     private void btn_retroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_retroActionPerformed
         
-        String retro = null;
-        if (txt_result.getText().length() > 0)
-        {
-            StringBuilder sb = new StringBuilder(txt_result.getText());
-            sb.deleteCharAt(txt_result.getText().length() - 1);
-            retro = sb.toString();
-            txt_result.setText(retro);
-        }
+        String str = txt_result.getText();
+        str = str.substring(0, str.length() - 1);
+        txt_result.setText(str);
     }//GEN-LAST:event_btn_retroActionPerformed
 
     private void btn_dotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dotActionPerformed
         
-        if (! txt_result.getText().contains("."))
-        {
-            txt_result.setText(txt_result.getText() + btn_dot.getText());
-        }
+        txt_result.setText(txt_result.getText() + ".");
+        logToFile(".");
+        
     }//GEN-LAST:event_btn_dotActionPerformed
 
     private void btn_igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_igualActionPerformed
         
         NumEnter2 = Double.parseDouble(txt_result.getText());
         
-        if (op == "+")
-        {
-            Result = NumEnter1 + NumEnter2;
-            txt_result.setText(String.valueOf(Result));
+        switch (op) {
+            case "+":
+                Result = NumEnter1 + NumEnter2;
+                break;
+            case "-":
+                Result = NumEnter1 - NumEnter2;
+                break;
+            case "*":
+                Result = NumEnter1 * NumEnter2;
+                break;
+            case "/":
+                Result = NumEnter1 / NumEnter2;
+                break;
         }
         
-        else if (op == "-")
-        {
-            Result = NumEnter1 - NumEnter2;
-            txt_result.setText(String.valueOf(Result));
-        }
-        
-        else if (op == "*")
-        {
-            Result = NumEnter1 * NumEnter2;
-            txt_result.setText(String.valueOf(Result));
-        }
-        
-        else if (op == "/")
-        {
-            Result = NumEnter1 / NumEnter2;
-            txt_result.setText(String.valueOf(Result));
-        }
+        txt_result.setText(String.format("%.2f", Result));
+        logToFile("=" + Result);
     }//GEN-LAST:event_btn_igualActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        txt_result.setText("");
+        NumEnter1 = 0;
+        NumEnter2 = 0;
+        logToFile("Nuevo");
+    }//GEN-LAST:event_jMenuItemNuevoActionPerformed
 
+    private void jMenuItemHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistorialActionPerformed
+        // TODO add your handling code here:
+        JFrame historialFrame = new JFrame("Historial de Operaciones");
+        JTextArea historialTextArea = new JTextArea(20, 40);
+        historialTextArea.setEditable(false);
+        try (BufferedReader reader = new BufferedReader(new FileReader("bitacoraCalculadora.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                historialTextArea.append(line + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        historialFrame.add(new JScrollPane(historialTextArea));
+        historialFrame.pack();
+        historialFrame.setVisible(true);
+    }//GEN-LAST:event_jMenuItemHistorialActionPerformed
+
+        private void logToFile(String entry) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bitacoraCalculadora.txt", true))) {
+            writer.write(entry);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -494,8 +599,8 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JButton btn_por;
     private javax.swing.JButton btn_retro;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemHistorial;
+    private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JMenu menu_help;
     private javax.swing.JMenu menu_opt;
     private javax.swing.JTextField txt_result;
