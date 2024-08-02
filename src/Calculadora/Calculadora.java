@@ -6,7 +6,6 @@ package Calculadora;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -14,6 +13,9 @@ import javax.swing.JScrollPane;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import javax.sound.sampled.*;
+
 /**
  *
  * @author Cristian Padilla
@@ -63,15 +65,17 @@ public class Calculadora extends javax.swing.JFrame {
         btn_dot = new javax.swing.JButton();
         btn_igual = new javax.swing.JButton();
         btn_div = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_opt = new javax.swing.JMenu();
         jMenuItemNuevo = new javax.swing.JMenuItem();
         jMenuItemHistorial = new javax.swing.JMenuItem();
         menu_help = new javax.swing.JMenu();
+        jMenuItemManual = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txt_result.setFont(new java.awt.Font("Cambria Math", 1, 36)); // NOI18N
+        txt_result.setFont(new java.awt.Font("Candara", 1, 36)); // NOI18N
         txt_result.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txt_result.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,8 +244,12 @@ public class Calculadora extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 32)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Calculadora Básica");
+
         menu_opt.setText("Opciones");
-        menu_opt.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        menu_opt.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
 
         jMenuItemNuevo.setText("Nuevo");
         jMenuItemNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +270,16 @@ public class Calculadora extends javax.swing.JFrame {
         jMenuBar1.add(menu_opt);
 
         menu_help.setText("Ayuda");
-        menu_help.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        menu_help.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+
+        jMenuItemManual.setText("Manual de Usuario");
+        jMenuItemManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemManualActionPerformed(evt);
+            }
+        });
+        menu_help.add(jMenuItemManual);
+
         jMenuBar1.add(menu_help);
 
         setJMenuBar(jMenuBar1);
@@ -271,58 +288,61 @@ public class Calculadora extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_result, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_retro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(btn_ce, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(btn_c, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(btn_mm, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_digit1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_digit2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_digit3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_mas, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_digit4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_digit5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_digit6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_menos, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_digit7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_digit8, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_digit9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_por, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_digit0, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_dot, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(10, 10, 10)
                         .addComponent(btn_igual, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(btn_div, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
+                        .addComponent(btn_div, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_result, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_retro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btn_ce, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btn_c, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btn_mm, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_result, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_retro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_ce, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,23 +378,45 @@ public class Calculadora extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void playSound() {
+    try {
+
+        java.net.URL soundURL = getClass().getResource("/mouse-click-sfx.wav");
+        if (soundURL == null) {
+            throw new IOException("El archivo de sonido no se encontró en la ruta: " + getClass().getResource("/mouse-click-sfx.wav"));
+        }
+
+        System.out.println("Ruta del archivo de sonido: " + soundURL);
+
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundURL);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        System.out.println("Error al reproducir el sonido: " + e.getMessage());
+    }
+}
+    
     private void txt_resultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_resultActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_resultActionPerformed
 
     private void btn_digit6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit6ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "6");
         logToFile("6");
     }//GEN-LAST:event_btn_digit6ActionPerformed
 
     private void btn_digit8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit8ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "8");
         logToFile("8");
     }//GEN-LAST:event_btn_digit8ActionPerformed
 
     private void btn_porActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_porActionPerformed
+        playSound();
         NumEnter1 = Double.parseDouble(txt_result.getText() );
         txt_result.setText("");
         op = "*";
@@ -383,54 +425,63 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void btn_digit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit1ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "1");
         logToFile("1");
     }//GEN-LAST:event_btn_digit1ActionPerformed
 
     private void btn_digit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit2ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "2");
         logToFile("2");
     }//GEN-LAST:event_btn_digit2ActionPerformed
 
     private void btn_digit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit3ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "3");
         logToFile("3");
     }//GEN-LAST:event_btn_digit3ActionPerformed
 
     private void btn_digit4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit4ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "4");
         logToFile("4");
     }//GEN-LAST:event_btn_digit4ActionPerformed
 
     private void btn_digit5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit5ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "5");
         logToFile("5");
     }//GEN-LAST:event_btn_digit5ActionPerformed
 
     private void btn_digit7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit7ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "7");
         logToFile("7");
     }//GEN-LAST:event_btn_digit7ActionPerformed
 
     private void btn_digit9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit9ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "9");
         logToFile("9");
     }//GEN-LAST:event_btn_digit9ActionPerformed
 
     private void btn_digit0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_digit0ActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText(txt_result.getText() + "0");
         logToFile("0");
     }//GEN-LAST:event_btn_digit0ActionPerformed
 
     private void btn_divActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_divActionPerformed
         // TODO add your handling code here:
+        playSound();
         NumEnter1 = Double.parseDouble(txt_result.getText() );
         txt_result.setText("");
         op = "/";
@@ -438,6 +489,7 @@ public class Calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_divActionPerformed
 
     private void btn_masActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_masActionPerformed
+        playSound();
         NumEnter1 = Double.parseDouble(txt_result.getText() );
         txt_result.setText("");
         op = "+";
@@ -445,6 +497,7 @@ public class Calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_masActionPerformed
 
     private void btn_menosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menosActionPerformed
+        playSound();
         NumEnter1 = Double.parseDouble(txt_result.getText() );
         txt_result.setText("");
         op = "-";
@@ -452,40 +505,42 @@ public class Calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_menosActionPerformed
 
     private void btn_cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cActionPerformed
+        playSound();
         txt_result.setText("");
-        NumEnter1 = 0;
-        NumEnter2 = 0;
+        
     }//GEN-LAST:event_btn_cActionPerformed
 
     private void btn_ceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ceActionPerformed
+        playSound();
         txt_result.setText("");
-        
+        NumEnter1 = 0;
+        NumEnter2 = 0;
     }//GEN-LAST:event_btn_ceActionPerformed
 
     private void btn_mmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mmActionPerformed
-        
-        double val = Double.parseDouble(txt_result.getText());
-        val = val * -1;
-        txt_result.setText(String.format("%.2f", val));
+        playSound();
+        double val = Double.parseDouble(String.valueOf(txt_result.getText()));
+        val = val * (-1);
+        txt_result.setText(String.valueOf(val));
         logToFile("±");
     }//GEN-LAST:event_btn_mmActionPerformed
 
     private void btn_retroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_retroActionPerformed
-        
+        playSound();
         String str = txt_result.getText();
         str = str.substring(0, str.length() - 1);
         txt_result.setText(str);
     }//GEN-LAST:event_btn_retroActionPerformed
 
     private void btn_dotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dotActionPerformed
-        
+        playSound();
         txt_result.setText(txt_result.getText() + ".");
         logToFile(".");
         
     }//GEN-LAST:event_btn_dotActionPerformed
 
     private void btn_igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_igualActionPerformed
-        
+        playSound();
         NumEnter2 = Double.parseDouble(txt_result.getText());
         
         switch (op) {
@@ -509,6 +564,7 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
         // TODO add your handling code here:
+        playSound();
         txt_result.setText("");
         NumEnter1 = 0;
         NumEnter2 = 0;
@@ -517,6 +573,7 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void jMenuItemHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistorialActionPerformed
         // TODO add your handling code here:
+        playSound();
         JFrame historialFrame = new JFrame("Historial de Operaciones");
         JTextArea historialTextArea = new JTextArea(20, 40);
         historialTextArea.setEditable(false);
@@ -532,6 +589,46 @@ public class Calculadora extends javax.swing.JFrame {
         historialFrame.pack();
         historialFrame.setVisible(true);
     }//GEN-LAST:event_jMenuItemHistorialActionPerformed
+
+    private void jMenuItemManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemManualActionPerformed
+        // TODO add your handling code here:
+        playSound();
+        JFrame manualFrame = new JFrame("Manual de Usuario");
+        JTextArea manualTextArea = new JTextArea(20, 40);
+        manualTextArea.setEditable(false);
+        manualTextArea.setText("--------------------------Manual de Usuario de la Calculadora--------------------------\n\n" +
+            "• Nota: La calculadora solo permite realizar operaciones entre dos números \n" +
+            "       a la vez. Después de cada operación, es necesario limpiar el resultado \n" +
+            "       utilizando el botón C o CE antes de comenzar una nueva operación.\n\n" +
+            "1) Realizar Operaciones Aritméticas Básicas de Dos Números:\n" +
+            "• Suma (+): Introduce el primer número, presiona el botón +, introduce el\n" +
+            "       segundo número y luego presiona = para obtener el resultado.\n" +
+            "• Resta (-): Introduce el primer número, presiona el botón -, introduce el\n" +
+            "       segundo número y luego presiona =.\n" +
+            "• Multiplicación (*): Introduce el primer número, presiona el botón *,\n" +
+            "       introduce el segundo número y luego presiona =.\n" +
+            "• División (/): Introduce el primer número, presiona el botón /, introduce el\n" +
+            "       segundo número y luego presiona =.\n\n" +
+            "2) Funciones Básicas\n" +
+            "• Retroceso (←): Borra el último dígito de la derecha.\n" +
+            "• Clear Everything (CE): Resetea la calculadora en cero, dejándola vacía.\n" +
+            "• Clear (C): Limpia el resultado actual sin resetear completamente la\n" +
+            "       calculadora.\n" +
+            "• Más Menos (±): Cambia el signo del número de positivo a negativo y\n" +
+            "       viceversa.\n" +
+            "• Punto (.): Introduce un punto decimal en el número actual. Esto permite\n" +
+            "       trabajar con números decimales para realizar operaciones más precisas.\n\n" +
+            "3) Menú\n" +
+            "   • Opciones.\n" +
+            "           □ Nuevo: Permite reiniciar la calculadora.\n" +
+            "           □ Historial: Muestra el historial de operaciones.\n" +
+            "   • Ayuda.\n" +
+            "           □ Manual de Usuario.\n");
+
+        manualFrame.add(new JScrollPane(manualTextArea));
+        manualFrame.pack();
+        manualFrame.setVisible(true);
+    }//GEN-LAST:event_jMenuItemManualActionPerformed
 
         private void logToFile(String entry) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("bitacoraCalculadora.txt", true))) {
@@ -598,8 +695,10 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JButton btn_mm;
     private javax.swing.JButton btn_por;
     private javax.swing.JButton btn_retro;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemHistorial;
+    private javax.swing.JMenuItem jMenuItemManual;
     private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JMenu menu_help;
     private javax.swing.JMenu menu_opt;
